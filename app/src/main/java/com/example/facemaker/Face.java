@@ -24,6 +24,10 @@ public class Face extends SurfaceView implements RadioGroup.OnCheckedChangeListe
         int red;
         int green;
         int blue;
+        int redProgress;
+        int greenProgress;
+        int blueProgress;
+        int progress;
 
         boolean skin;
         boolean hair;
@@ -37,7 +41,7 @@ public class Face extends SurfaceView implements RadioGroup.OnCheckedChangeListe
         Paint paintnose = new Paint();
         Paint paintmouth = new Paint();
 
-        int skinColor= android.graphics.Color.rgb(red,green,blue);
+        int skinColor;
         int eyeColor;
         int hairColor;
         int hairStyle;
@@ -136,12 +140,14 @@ public class Face extends SurfaceView implements RadioGroup.OnCheckedChangeListe
                 eyes=true;
                 skin=false;
                 hair=false;
+
                 break;
             case R.id.radioButtonHair:
                 hair = true;
                 skin=false;
                 eyes=false;
                 //code for only changing haircolor
+
                 break;
             case R.id.radioButtonSkin:
                 skin =true;
@@ -157,15 +163,18 @@ public class Face extends SurfaceView implements RadioGroup.OnCheckedChangeListe
     public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
         switch(seekBar.getId()){
             case R.id.seekBarRed:
-                red = progress;
+                int redProgress = progress;
+                red = redProgress;
                 break;
 
             case R.id.seekBarGreen:
-                green = progress;
+                int greenProgress = progress;
+                green = greenProgress;
                 break;
 
             case R.id.seekBarBlue:
-                blue = progress;
+                int blueProgress = progress;
+                blue = blueProgress;
                 break;
 
         }
@@ -175,10 +184,27 @@ public class Face extends SurfaceView implements RadioGroup.OnCheckedChangeListe
     @Override
     public void onStartTrackingTouch(SeekBar seekBar) {
 
+
     }
 
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
+        switch(seekBar.getId()){
+            case R.id.seekBarRed:
+                red = redProgress;
+                break;
+
+            case R.id.seekBarGreen:
+                green = greenProgress;
+                break;
+
+            case R.id.seekBarBlue:
+                blue = blueProgress;
+                break;
+
+        }
+
+        invalidate();
 
     }
 
