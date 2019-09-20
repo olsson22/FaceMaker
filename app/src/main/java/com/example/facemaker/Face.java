@@ -18,7 +18,8 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
-public class Face extends SurfaceView implements RadioGroup.OnCheckedChangeListener, SeekBar.OnSeekBarChangeListener, Spinner.OnItemSelectedListener {
+public class Face extends SurfaceView implements RadioGroup.OnCheckedChangeListener,
+        SeekBar.OnSeekBarChangeListener, Spinner.OnItemSelectedListener, View.OnClickListener {
 
         int red;
         int green;
@@ -40,14 +41,14 @@ public class Face extends SurfaceView implements RadioGroup.OnCheckedChangeListe
         int eyeColor;
         int hairColor;
         int hairStyle;
-    List <String> haircuts = new ArrayList<>();
+    List <Integer> haircuts = new ArrayList<>();
 
         public Face(Context context, AttributeSet attrs){
             super(context, attrs);
-            haircuts.add("mohawk");
-            haircuts.add("buzzccut");
-            haircuts.add("other cut");
-       /* this.skinColor=skinColor;
+            randomize();
+            haircuts.add(1);
+            haircuts.add(2);
+            haircuts.add(3);      /* this.skinColor=skinColor;
         this.eyeColor = eyeColor;
         this.hairColor = hairColor;
         this.hairStyle = hairStyle;*/
@@ -99,21 +100,29 @@ public class Face extends SurfaceView implements RadioGroup.OnCheckedChangeListe
                 hairColor = android.graphics.Color.rgb(red,green,blue);
             }
             painthair.setColor(hairColor);
-           // canvas.drawRect(900,30,1000,200,painthair);
-            canvas.drawOval(800, 50,1100,150,painthair);
+            switch(hairStyle) {
+                case 1:  canvas.drawRect(900, 30, 1000, 200, painthair);
+                break;
+                case 2: canvas.drawOval(800, 50, 1100, 150, painthair);
+                break;
+                case 3: for(int i =1;i<170;i++){
+                    canvas.drawLine(750 +2*i,180,850+2*i, 30,painthair);
+                }
 
 
 
+            }
 
 
 
     }
 
         public void randomize(){
+
             Random rand = new Random();
-            skinColor = rand.nextInt(255)+1;
-            eyeColor = rand.nextInt(255)+1;
-            hairColor=rand.nextInt(255)+1;
+            skinColor = android.graphics.Color.rgb(rand.nextInt(255)+1,rand.nextInt(255)+1,rand.nextInt(255)+1);
+            eyeColor = android.graphics.Color.rgb(rand.nextInt(255)+1,rand.nextInt(255)+1,rand.nextInt(255)+1);
+            hairColor=android.graphics.Color.rgb(rand.nextInt(255)+1,rand.nextInt(255)+1,rand.nextInt(255)+1);
             hairStyle=rand.nextInt(3)+1;
         }
 
@@ -177,13 +186,22 @@ public class Face extends SurfaceView implements RadioGroup.OnCheckedChangeListe
 
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        hairStyle = (int) parent.getItemAtPosition(position);
+
+        invalidate();
+        }
 
 
-    }
 
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
+    }
+
+    @Override
+    public void onClick(View view) {
+        randomize();
+        invalidate();
     }
 }
 

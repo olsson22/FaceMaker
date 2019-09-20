@@ -5,6 +5,7 @@ import android.view.SurfaceView;
 
 import android.os.Bundle;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.Spinner;
@@ -30,13 +31,17 @@ public class MainActivity extends AppCompatActivity {
 
         radiogroup.setOnCheckedChangeListener(faceobj);
         Spinner spinner = findViewById(R.id.spinner2);
-        spinner.setOnItemSelectedListener(faceobj);
+        //spinner.setOnItemSelectedListener(faceobj);
 
-        ArrayAdapter<String> dataAdapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, faceobj.haircuts);
+        ArrayAdapter<Integer> dataAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, faceobj.haircuts);
 
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
         spinner.setAdapter(dataAdapter);
+        spinner.setOnItemSelectedListener(faceobj);
+
+        Button randomButton = findViewById(R.id.buttonRandom);
+        randomButton.setOnClickListener(faceobj);
 
 
 
