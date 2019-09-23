@@ -171,7 +171,7 @@ public class Face extends SurfaceView implements RadioGroup.OnCheckedChangeListe
                 eyes=true;
                 skin=false;
                 hair=false;
-                
+
                 invalidate();
 
 
