@@ -21,8 +21,11 @@ public class MainActivity extends AppCompatActivity {
         SeekBar seekBarRed = findViewById(R.id.seekBarRed);
         seekBarRed.setOnSeekBarChangeListener(faceobj);
 
+
+
         SeekBar seekBarGreen = findViewById(R.id.seekBarGreen);
         seekBarGreen.setOnSeekBarChangeListener(faceobj);
+
 
         SeekBar seekBarBlue = findViewById(R.id.seekBarBlue);
         seekBarBlue.setOnSeekBarChangeListener(faceobj);
@@ -30,6 +33,31 @@ public class MainActivity extends AppCompatActivity {
         RadioGroup radiogroup = findViewById(R.id.radiogroup);
 
         radiogroup.setOnCheckedChangeListener(faceobj);
+        radiogroup.findViewById(R.id.radioButtonSkin);
+
+            if (faceobj.skin) {
+                seekBarRed.setProgress(faceobj.redskin);
+                seekBarGreen.setProgress(faceobj.greenskin);
+                seekBarBlue.setProgress(faceobj.blueskin);
+                faceobj.invalidate();
+            }
+            if (faceobj.hair) {
+                seekBarRed.setProgress(faceobj.redhair);
+                seekBarGreen.setProgress(faceobj.greenhair);
+                seekBarBlue.setProgress(faceobj.blueskin);
+                faceobj.invalidate();
+            }
+            if (faceobj.eyes) {
+                seekBarRed.setProgress(faceobj.redeyes);
+                seekBarGreen.setProgress(faceobj.greeneyes);
+                seekBarBlue.setProgress(faceobj.blueeyes);
+                faceobj.invalidate();
+
+        }
+
+
+
+
         Spinner spinner = findViewById(R.id.spinner2);
         //spinner.setOnItemSelectedListener(faceobj);
 

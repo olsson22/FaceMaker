@@ -21,17 +21,25 @@ import java.util.Random;
 public class Face extends SurfaceView implements RadioGroup.OnCheckedChangeListener,
         SeekBar.OnSeekBarChangeListener, Spinner.OnItemSelectedListener, View.OnClickListener {
 
-        int red;
-        int green;
-        int blue;
-        int redProgress;
-        int greenProgress;
-        int blueProgress;
-        int progress;
 
-        boolean skin;
-        boolean hair;
-        boolean eyes;
+
+
+
+        public int redhair;
+        public int greenhair;
+        public int bluehair;
+
+        public int redeyes;
+        public int greeneyes;
+        public int blueeyes;
+
+        public int redskin;
+        public int greenskin;
+        public int blueskin;
+
+        public boolean skin;
+        public boolean hair;
+        public boolean eyes;
 
 
 
@@ -52,7 +60,12 @@ public class Face extends SurfaceView implements RadioGroup.OnCheckedChangeListe
             randomize();
             haircuts.add(1);
             haircuts.add(2);
-            haircuts.add(3);      /* this.skinColor=skinColor;
+            haircuts.add(3);
+            skin = true;
+            eyes = true;
+            hair = true;
+
+            /* this.skinColor=skinColor;
         this.eyeColor = eyeColor;
         this.hairColor = hairColor;
         this.hairStyle = hairStyle;*/
@@ -63,9 +76,9 @@ public class Face extends SurfaceView implements RadioGroup.OnCheckedChangeListe
         public void onDraw(Canvas canvas){
 
         //paints the faceshape
-        if(skin){
-            skinColor = android.graphics.Color.rgb(red,green, blue);
-        }
+       // if(skin) {
+            skinColor = android.graphics.Color.rgb(redskin, greenskin, blueskin);
+        //}
         paintface.setColor(skinColor);
         canvas.drawOval(700, 50, 1200, 700, paintface);
 
@@ -76,9 +89,9 @@ public class Face extends SurfaceView implements RadioGroup.OnCheckedChangeListe
         canvas.drawCircle(850,250,40,painteyes);
         canvas.drawCircle(1050,250,40,painteyes);
         //sets the color of the iris and paints it
-            if(eyes){
-                eyeColor = android.graphics.Color.rgb(red,green,blue);
-            }
+            //if(eyes){
+                eyeColor = android.graphics.Color.rgb(redeyes,greeneyes,blueeyes);
+            //}
         painteyes.setColor(eyeColor);
         canvas.drawCircle(850, 250,20,painteyes);
         canvas.drawCircle(1050,250,20,painteyes);
@@ -100,9 +113,9 @@ public class Face extends SurfaceView implements RadioGroup.OnCheckedChangeListe
         canvas.drawOval(850, 550, 1050, 650, paintmouth);
 
         //sets the color of the hair and draws it
-            if(hair){
-                hairColor = android.graphics.Color.rgb(red,green,blue);
-            }
+            //if(hair){
+                hairColor = android.graphics.Color.rgb(redhair,greenhair,bluehair);
+            //}
             painthair.setColor(hairColor);
             switch(hairStyle) {
                 case 1:  canvas.drawRect(900, 30, 1000, 200, painthair);
@@ -122,17 +135,35 @@ public class Face extends SurfaceView implements RadioGroup.OnCheckedChangeListe
     }
 
         public void randomize(){
+          //  skin = true;
+            //eyes = true;
+            //hair = true;
 
             Random rand = new Random();
-            skinColor = android.graphics.Color.rgb(rand.nextInt(255)+1,rand.nextInt(255)+1,rand.nextInt(255)+1);
-            eyeColor = android.graphics.Color.rgb(rand.nextInt(255)+1,rand.nextInt(255)+1,rand.nextInt(255)+1);
-            hairColor=android.graphics.Color.rgb(rand.nextInt(255)+1,rand.nextInt(255)+1,rand.nextInt(255)+1);
+            redskin = rand.nextInt(255)+1;
+            greenskin = rand.nextInt(255)+1;
+            blueskin = rand.nextInt(255)+1;
+            skinColor = android.graphics.Color.rgb(redskin,greenskin,blueskin);
+
+            redeyes = rand.nextInt(255)+1;
+            greeneyes = rand.nextInt(255)+1;
+            blueeyes = rand.nextInt(255)+1;
+            eyeColor = android.graphics.Color.rgb(redeyes,greeneyes,blueeyes);
+
+            redhair = rand.nextInt(255)+1;
+            greenhair = rand.nextInt(255)+1;
+            bluehair = rand.nextInt(255)+1;
+            hairColor=android.graphics.Color.rgb(redhair,greenhair,bluehair);
+
+
             hairStyle=rand.nextInt(3)+1;
+            invalidate();
         }
 
 
     @Override
     public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
+
         switch(checkedId){
             case R.id.radioButtonEyes:
                 Log.d("onCheckedChange", "this is now checked");
@@ -140,12 +171,16 @@ public class Face extends SurfaceView implements RadioGroup.OnCheckedChangeListe
                 eyes=true;
                 skin=false;
                 hair=false;
+                
+                invalidate();
+
 
                 break;
             case R.id.radioButtonHair:
                 hair = true;
                 skin=false;
                 eyes=false;
+                invalidate();
                 //code for only changing haircolor
 
                 break;
@@ -154,27 +189,47 @@ public class Face extends SurfaceView implements RadioGroup.OnCheckedChangeListe
                 hair = false;
                 eyes=false;//skinColor = android.graphics.Color.rgb(red,green,blue);
                 //code for only changing skincolor
+                invalidate();
                 break;
         }
-        invalidate();
+       // invalidate();
     }
 
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
-        switch(seekBar.getId()){
-            case R.id.seekBarRed:
-                int redProgress = progress;
-                red = redProgress;
+
+
+
+            switch(seekBar.getId()){
+                case R.id.seekBarRed:
+                    if(skin){
+
+                    redskin = progress;}
+                    else if(eyes){
+
+                        redeyes=progress;}
+                    else if(hair){
+
+                        redhair=progress;}
+
                 break;
 
             case R.id.seekBarGreen:
-                int greenProgress = progress;
-                green = greenProgress;
+                if(skin){
+                    greenskin = progress;}
+                else if(eyes){greeneyes=progress;}
+                else if(hair){greenhair=progress;}
+
+
                 break;
 
             case R.id.seekBarBlue:
-                int blueProgress = progress;
-                blue = blueProgress;
+                if(skin){
+                    blueskin = progress;}
+                else if(eyes){blueeyes=progress;}
+                else if(hair){bluehair=progress;}
+
+
                 break;
 
         }
@@ -189,22 +244,7 @@ public class Face extends SurfaceView implements RadioGroup.OnCheckedChangeListe
 
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
-        switch(seekBar.getId()){
-            case R.id.seekBarRed:
-                red = redProgress;
-                break;
 
-            case R.id.seekBarGreen:
-                green = greenProgress;
-                break;
-
-            case R.id.seekBarBlue:
-                blue = blueProgress;
-                break;
-
-        }
-
-        invalidate();
 
     }
 
