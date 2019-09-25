@@ -9,6 +9,7 @@ import android.util.Log;
 import android.view.SurfaceView;
 import android.view.View;
 import android.widget.AdapterView;
+import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.Spinner;
@@ -40,6 +41,13 @@ public class Face extends SurfaceView implements RadioGroup.OnCheckedChangeListe
         public boolean skin;
         public boolean hair;
         public boolean eyes;
+        public boolean first;
+
+        private SeekBar seekBarRed;
+        private SeekBar seekBarGreen;
+        private SeekBar seekBarBlue;
+
+        private RadioGroup radioGroup;
 
 
 
@@ -61,24 +69,28 @@ public class Face extends SurfaceView implements RadioGroup.OnCheckedChangeListe
             haircuts.add(1);
             haircuts.add(2);
             haircuts.add(3);
-            skin = true;
-            eyes = true;
-            hair = true;
+
+
+
+
+
+
 
             /* this.skinColor=skinColor;
         this.eyeColor = eyeColor;
         this.hairColor = hairColor;
         this.hairStyle = hairStyle;*/
             setWillNotDraw(false);
+
         }
 
 
         public void onDraw(Canvas canvas){
 
         //paints the faceshape
-       // if(skin) {
+
             skinColor = android.graphics.Color.rgb(redskin, greenskin, blueskin);
-        //}
+
         paintface.setColor(skinColor);
         canvas.drawOval(700, 50, 1200, 700, paintface);
 
@@ -113,10 +125,11 @@ public class Face extends SurfaceView implements RadioGroup.OnCheckedChangeListe
         canvas.drawOval(850, 550, 1050, 650, paintmouth);
 
         //sets the color of the hair and draws it
-            //if(hair){
+
                 hairColor = android.graphics.Color.rgb(redhair,greenhair,bluehair);
-            //}
+
             painthair.setColor(hairColor);
+            painthair.setStrokeWidth(2);
             switch(hairStyle) {
                 case 1:  canvas.drawRect(900, 30, 1000, 200, painthair);
                 break;
@@ -157,9 +170,44 @@ public class Face extends SurfaceView implements RadioGroup.OnCheckedChangeListe
 
 
             hairStyle=rand.nextInt(3)+1;
+
+            if(skin){
+                seekBarRed.setProgress(redskin);
+                seekBarGreen.setProgress(greenskin);
+                seekBarBlue.setProgress(blueskin);
+            }
+            else if(eyes){
+                seekBarRed.setProgress(redeyes);
+                seekBarGreen.setProgress(greeneyes);
+                seekBarBlue.setProgress(blueeyes);
+            }
+            else if(hair){
+                seekBarRed.setProgress(redhair);
+                seekBarGreen.setProgress(greenhair);
+                seekBarBlue.setProgress(bluehair);
+            }
+
+
+
             invalidate();
         }
 
+        public void setSeekBars(SeekBar seekBarRed,SeekBar seekBarGreen,SeekBar seekBarBlue){
+            this.seekBarRed=seekBarRed;
+            this.seekBarGreen = seekBarGreen;
+            this.seekBarBlue = seekBarBlue;
+        }
+
+        public void setRadioGroup(RadioGroup radioGroup){
+            this.radioGroup=radioGroup;
+            skin = true;
+        }
+
+public void updateSeekBars(){
+            seekBarRed.setProgress(redskin);
+            seekBarGreen.setProgress(greenskin);
+            seekBarBlue.setProgress(blueskin);
+}
 
     @Override
     public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
@@ -171,7 +219,10 @@ public class Face extends SurfaceView implements RadioGroup.OnCheckedChangeListe
                 eyes=true;
                 skin=false;
                 hair=false;
-
+                seekBarRed.setProgress(redeyes);
+                seekBarGreen.setProgress(greeneyes);
+                seekBarBlue.setProgress(blueeyes);
+                //update seekbars with values of eyes
                 invalidate();
 
 
@@ -180,6 +231,9 @@ public class Face extends SurfaceView implements RadioGroup.OnCheckedChangeListe
                 hair = true;
                 skin=false;
                 eyes=false;
+                seekBarRed.setProgress(redhair);
+                seekBarGreen.setProgress(greenhair);
+                seekBarBlue.setProgress(bluehair);
                 invalidate();
                 //code for only changing haircolor
 
@@ -187,8 +241,10 @@ public class Face extends SurfaceView implements RadioGroup.OnCheckedChangeListe
             case R.id.radioButtonSkin:
                 skin =true;
                 hair = false;
-                eyes=false;//skinColor = android.graphics.Color.rgb(red,green,blue);
-                //code for only changing skincolor
+                eyes=false;
+                seekBarRed.setProgress(redskin);
+                seekBarGreen.setProgress(greenskin);
+                seekBarBlue.setProgress(blueskin);
                 invalidate();
                 break;
         }
