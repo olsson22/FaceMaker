@@ -22,7 +22,8 @@ import java.util.Random;
 /**
  * @author Fredrik Olsson
  *
- * This class represents a Face on a specific x and y spot on a surfaceview
+ * This class represents a Face on a specific
+ * Context and AttributeSet
  *
  *
  */
@@ -57,7 +58,7 @@ public class Face extends SurfaceView implements RadioGroup.OnCheckedChangeListe
         private SeekBar seekBarBlue;
 
         private RadioGroup radioGroup;
-
+        Spinner spinner;
 
 
         Paint paintFace = new Paint();
@@ -96,7 +97,19 @@ public class Face extends SurfaceView implements RadioGroup.OnCheckedChangeListe
 
         public void onDraw(Canvas canvas){
 
-        //paints the faceshape
+
+            /**
+             External Citation
+
+             Date: 21 September 2019
+
+             Problem: did not know how to convert rgb values to a single int.
+
+             Resource: https://stackoverflow.com/questions/18022364/how-to-convert-rgb-color-to-int-in-java
+
+             Solution: I found the android.graphics.Color.rgb()-method from this page
+             * */
+            //paints the faceshape
         skinColor = android.graphics.Color.rgb(redSkin, greenSkin, blueSkin);
 
         paintFace.setColor(skinColor);
@@ -234,6 +247,7 @@ public class Face extends SurfaceView implements RadioGroup.OnCheckedChangeListe
             seekBarBlue.setProgress(blueSkin);
 }
 
+
     /**
      * Listens continuously to see if a click-event happens of one
      * of the radiobuttons. If that happens, the values of the seekbars
@@ -248,17 +262,17 @@ public class Face extends SurfaceView implements RadioGroup.OnCheckedChangeListe
         switch(checkedId){
             case R.id.radioButtonEyes:
                 Log.d("onCheckedChange", "this is now checked");
-                //code for only manipulating eyecolor
+                //Only manipulating eyecolor
                 eyes=true;
                 skin=false;
                 hair=false;
                 seekBarRed.setProgress(redEyes);
                 seekBarGreen.setProgress(greenEyes);
                 seekBarBlue.setProgress(blueEyes);
-                //update seekbars with values of eyes
                 invalidate();
                 break;
             case R.id.radioButtonHair:
+                //Only manipulating haircolor
                 hair = true;
                 skin=false;
                 eyes=false;
@@ -268,6 +282,7 @@ public class Face extends SurfaceView implements RadioGroup.OnCheckedChangeListe
                 invalidate();
                 break;
             case R.id.radioButtonSkin:
+                //Only manipulating skincolor
                 skin =true;
                 hair = false;
                 eyes=false;
@@ -365,6 +380,17 @@ public class Face extends SurfaceView implements RadioGroup.OnCheckedChangeListe
      */
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+        /**
+         External Citation
+
+         Date: 22 September 2019
+
+         Problem: did not know how to use the Adapterview.OnSelectedItemListener
+
+         Resource: https://developer.android.com/guide/topics/ui/controls/spinner
+
+         Solution: I used the examples from this page
+         * */
         hairStyle = (int) parent.getItemAtPosition(position);
         invalidate();
         }
@@ -389,6 +415,7 @@ public class Face extends SurfaceView implements RadioGroup.OnCheckedChangeListe
     @Override
     public void onClick(View view) {
         randomize();
+
         invalidate();
     }
 }

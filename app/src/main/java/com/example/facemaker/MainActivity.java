@@ -85,6 +85,8 @@ public class MainActivity extends AppCompatActivity {
         //Specifies the layout to use when the different options appear
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
+
+
         //Applies the Adapter to the spinner
         spinner.setAdapter(dataAdapter);
 
