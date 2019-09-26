@@ -67,7 +67,7 @@
                 android:id="@+id/textViewGrenn"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text=" How much Green you want?" />
+                android:text="Set amount of Green" />
 
             <Space
                 android:layout_width="match_parent"
@@ -87,7 +87,7 @@
                 android:id="@+id/textViewRed"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text=" How much Red you want?" />
+                android:text="Set amount of Red" />
 
             <Space
                 android:layout_width="match_parent"
@@ -107,7 +107,7 @@
                 android:id="@+id/textViewBlue"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:text="How much blue you want?" />
+                android:text="Set amount of Blue" />
 
             <Space
                 android:layout_width="match_parent"

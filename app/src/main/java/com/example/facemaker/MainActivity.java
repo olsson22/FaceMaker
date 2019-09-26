@@ -21,66 +21,77 @@ public class MainActivity extends AppCompatActivity {
         Face faceobj = findViewById(R.id.theSurfaceView);
 
 
-
-
-
-
+        //Creates the Red Seekbar Object.
         SeekBar seekBarRed = findViewById(R.id.seekBarRed);
+
+        //Sets on the listener for the Red Seekbar Object
         seekBarRed.setOnSeekBarChangeListener(faceobj);
 
 
-
+        //Creates the Green Seekbar Object
         SeekBar seekBarGreen = findViewById(R.id.seekBarGreen);
+
+        //Sets on the listener for the Green Seekbar object
         seekBarGreen.setOnSeekBarChangeListener(faceobj);
 
 
+        //Creates the Blue Seekbar Object
         SeekBar seekBarBlue = findViewById(R.id.seekBarBlue);
+
+        //Sets on the listener for the Blue SeekBar object
         seekBarBlue.setOnSeekBarChangeListener(faceobj);
 
+
+        //Creates the Radiogroup object
         RadioGroup radiogroup = findViewById(R.id.radiogroup);
 
-
+        //Sets on the listener for the Radiogroup object
         radiogroup.setOnCheckedChangeListener(faceobj);
-        RadioButton radioButtonSkin = findViewById(R.id.radioButtonSkin);
 
-
-
-       // faceobj.setRadioButton(radioButtonSkin);
-
-
+        //Connects the Seekbars created in this class to the ones in the Face class
         faceobj.setSeekBars(seekBarRed, seekBarGreen, seekBarBlue);
 
+        //Connects the Radiogroup created in this class to the one in the Face class
         faceobj.setRadioGroup(radiogroup);
-        radiogroup.check(R.id.radioButtonSkin);
+
+        //Updates the seekBars before any of the Radiobuttons have been checked by a user
         faceobj.updateSeekBars();
 
+        //Creates the Button Object
+        Button randomButton = findViewById(R.id.buttonRandom);
 
-
-
+        //Sets on the clicklistener for the Button object
+        randomButton.setOnClickListener(faceobj);
 
 
         /**
-         * Date: 22 September 2019
+         External Citation
 
-         Problem: did not know how to use the Adapterview.OnSelectedItemListener
+             Date: 22 September 2019
 
-         Resource: https://developer.android.com/guide/topics/ui/controls/spinner
+             Problem: did not know how to use the Adapterview.OnSelectedItemListener
+
+             Resource: https://developer.android.com/guide/topics/ui/controls/spinner
 
          Solution: I used the examples from this page
         * */
 
-
+        //Creates the spinner object
         Spinner spinner = findViewById(R.id.spinner2);
 
-        ArrayAdapter<Integer> dataAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, faceobj.haircuts);
+        //Creates an arraylist where the different haircuts will be added in the Face Class
+        ArrayAdapter<Integer> dataAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, faceobj.hairCuts);
 
+        //Specifies the layout to use when the different options appear
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
 
+        //Applies the Adapter to the spinner
         spinner.setAdapter(dataAdapter);
+
+        //Sets on the listener for the Spinner object
         spinner.setOnItemSelectedListener(faceobj);
 
-        Button randomButton = findViewById(R.id.buttonRandom);
-        randomButton.setOnClickListener(faceobj);
+
 
 
 

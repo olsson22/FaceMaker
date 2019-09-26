@@ -19,6 +19,15 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Random;
 
+/**
+ * @author Fredrik Olsson
+ *
+ * This class represents a Face on a specific x and y spot on a surfaceview
+ *
+ *
+ */
+
+
 public class Face extends SurfaceView implements RadioGroup.OnCheckedChangeListener,
         SeekBar.OnSeekBarChangeListener, Spinner.OnItemSelectedListener, View.OnClickListener {
 
@@ -26,22 +35,22 @@ public class Face extends SurfaceView implements RadioGroup.OnCheckedChangeListe
 
 
 
-        public int redhair;
-        public int greenhair;
-        public int bluehair;
+        public int redHair;
+        public int greenHair;
+        public int blueHair;
 
-        public int redeyes;
-        public int greeneyes;
-        public int blueeyes;
+        public int redEyes;
+        public int greenEyes;
+        public int blueEyes;
 
-        public int redskin;
-        public int greenskin;
-        public int blueskin;
+        public int redSkin;
+        public int greenSkin;
+        public int blueSkin;
 
         public boolean skin;
         public boolean hair;
         public boolean eyes;
-        public boolean first;
+        //public boolean first;
 
         private SeekBar seekBarRed;
         private SeekBar seekBarGreen;
@@ -51,164 +60,188 @@ public class Face extends SurfaceView implements RadioGroup.OnCheckedChangeListe
 
 
 
-        Paint paintface = new Paint();
-        Paint painthair = new Paint();
-        Paint painteyes = new Paint();
-        Paint paintnose = new Paint();
-        Paint paintmouth = new Paint();
+        Paint paintFace = new Paint();
+        Paint paintHair = new Paint();
+        Paint paintEyes = new Paint();
+        Paint paintNose = new Paint();
+        Paint paintMouth = new Paint();
 
         int skinColor;
         int eyeColor;
         int hairColor;
         int hairStyle;
-    List <Integer> haircuts = new ArrayList<>();
+    List <Integer> hairCuts = new ArrayList<>();
+
+    /**
+     * When a user creates a Face the user must specify what Context and
+     * what AttributeSet the Face should be created within.
+     * @param context
+     * @param attrs
+     */
 
         public Face(Context context, AttributeSet attrs){
             super(context, attrs);
             randomize();
-            haircuts.add(1);
-            haircuts.add(2);
-            haircuts.add(3);
-
-
-
-
-
-
-
-            /* this.skinColor=skinColor;
-        this.eyeColor = eyeColor;
-        this.hairColor = hairColor;
-        this.hairStyle = hairStyle;*/
+            hairCuts.add(1);
+            hairCuts.add(2);
+            hairCuts.add(3);
             setWillNotDraw(false);
 
         }
 
+    /**
+     * Paints the Face on the given Canvas
+     * @param canvas the canvas on which the Face will be drawn
+     */
 
         public void onDraw(Canvas canvas){
 
         //paints the faceshape
+        skinColor = android.graphics.Color.rgb(redSkin, greenSkin, blueSkin);
 
-            skinColor = android.graphics.Color.rgb(redskin, greenskin, blueskin);
-
-        paintface.setColor(skinColor);
-        canvas.drawOval(700, 50, 1200, 700, paintface);
+        paintFace.setColor(skinColor);
+        canvas.drawOval(700, 50, 1200, 700, paintFace);
 
         //paints the eyes
 
         //sets the color and paints the white part of the eye
-        painteyes.setColor(Color.WHITE);
-        canvas.drawCircle(850,250,40,painteyes);
-        canvas.drawCircle(1050,250,40,painteyes);
+        paintEyes.setColor(Color.WHITE);
+        canvas.drawCircle(850,250,40,paintEyes);
+        canvas.drawCircle(1050,250,40,paintEyes);
         //sets the color of the iris and paints it
-            //if(eyes){
-                eyeColor = android.graphics.Color.rgb(redeyes,greeneyes,blueeyes);
-            //}
-        painteyes.setColor(eyeColor);
-        canvas.drawCircle(850, 250,20,painteyes);
-        canvas.drawCircle(1050,250,20,painteyes);
+
+        eyeColor = android.graphics.Color.rgb(redEyes,greenEyes,blueEyes);
+
+        paintEyes.setColor(eyeColor);
+        canvas.drawCircle(850, 250,20,paintEyes);
+        canvas.drawCircle(1050,250,20,paintEyes);
+
        //sets the color of the black part of the eye and paints it
-        painteyes.setColor(Color.BLACK);
-        canvas.drawCircle(850, 250,10,painteyes);
-        canvas.drawCircle(1050,250,10,painteyes);
+        paintEyes.setColor(Color.BLACK);
+        canvas.drawCircle(850, 250,10,paintEyes);
+        canvas.drawCircle(1050,250,10,paintEyes);
 
 
         //sets the color for the lines representing the nose and then draws it
 
-        paintnose.setColor(Color.BLACK);
-        canvas.drawLine(950,350,900,450,paintnose);
-        canvas.drawLine(900,450,950,450,paintnose);
+        paintNose.setColor(Color.BLACK);
+        canvas.drawLine(950,350,900,450,paintNose);
+        canvas.drawLine(900,450,950,450,paintNose);
 
         //sets the color of the lips and draws it
 
-        paintmouth.setColor(Color.BLACK);
-        canvas.drawOval(850, 550, 1050, 650, paintmouth);
+        paintMouth.setColor(Color.BLACK);
+        canvas.drawOval(850, 550, 1050, 650, paintMouth);
 
         //sets the color of the hair and draws it
-
-                hairColor = android.graphics.Color.rgb(redhair,greenhair,bluehair);
-
-            painthair.setColor(hairColor);
-            painthair.setStrokeWidth(2);
+        hairColor = android.graphics.Color.rgb(redHair,greenHair,blueHair);
+        paintHair.setColor(hairColor);
+        paintHair.setStrokeWidth(2);
             switch(hairStyle) {
-                case 1:  canvas.drawRect(900, 30, 1000, 200, painthair);
+                case 1:  canvas.drawRect(900, 30, 1000, 200, paintHair);
                 break;
-                case 2: canvas.drawOval(800, 50, 1100, 150, painthair);
+                case 2: canvas.drawOval(800, 50, 1100, 150, paintHair);
                 break;
                 case 3: for(int i =1;i<170;i++){
-                    canvas.drawLine(750 +2*i,180,850+2*i, 30,painthair);
+                    canvas.drawLine(750 +2*i,180,850+2*i, 30,paintHair);
                 }
-
-
 
             }
 
-
-
     }
 
+    /**
+     * Randomizes the skinColor, hairColor and eyeColor.
+     * Depending on which radiobutton is clicked,
+     * then applies these colors to that face attribute
+     */
         public void randomize(){
-          //  skin = true;
-            //eyes = true;
-            //hair = true;
 
             Random rand = new Random();
-            redskin = rand.nextInt(255)+1;
-            greenskin = rand.nextInt(255)+1;
-            blueskin = rand.nextInt(255)+1;
-            skinColor = android.graphics.Color.rgb(redskin,greenskin,blueskin);
+            redSkin = rand.nextInt(255)+1;
+            greenSkin = rand.nextInt(255)+1;
+            blueSkin = rand.nextInt(255)+1;
+            skinColor = android.graphics.Color.rgb(redSkin,greenSkin,blueSkin);
 
-            redeyes = rand.nextInt(255)+1;
-            greeneyes = rand.nextInt(255)+1;
-            blueeyes = rand.nextInt(255)+1;
-            eyeColor = android.graphics.Color.rgb(redeyes,greeneyes,blueeyes);
+            redEyes = rand.nextInt(255)+1;
+            greenEyes = rand.nextInt(255)+1;
+            blueEyes = rand.nextInt(255)+1;
+            eyeColor = android.graphics.Color.rgb(redEyes,greenEyes,blueEyes);
 
-            redhair = rand.nextInt(255)+1;
-            greenhair = rand.nextInt(255)+1;
-            bluehair = rand.nextInt(255)+1;
-            hairColor=android.graphics.Color.rgb(redhair,greenhair,bluehair);
+            redHair = rand.nextInt(255)+1;
+            greenHair = rand.nextInt(255)+1;
+            blueHair = rand.nextInt(255)+1;
+            hairColor=android.graphics.Color.rgb(redHair,greenHair,blueHair);
 
 
             hairStyle=rand.nextInt(3)+1;
 
             if(skin){
-                seekBarRed.setProgress(redskin);
-                seekBarGreen.setProgress(greenskin);
-                seekBarBlue.setProgress(blueskin);
+                seekBarRed.setProgress(redSkin);
+                seekBarGreen.setProgress(greenSkin);
+                seekBarBlue.setProgress(blueSkin);
             }
             else if(eyes){
-                seekBarRed.setProgress(redeyes);
-                seekBarGreen.setProgress(greeneyes);
-                seekBarBlue.setProgress(blueeyes);
+                seekBarRed.setProgress(redEyes);
+                seekBarGreen.setProgress(greenEyes);
+                seekBarBlue.setProgress(blueEyes);
             }
             else if(hair){
-                seekBarRed.setProgress(redhair);
-                seekBarGreen.setProgress(greenhair);
-                seekBarBlue.setProgress(bluehair);
+                seekBarRed.setProgress(redHair);
+                seekBarGreen.setProgress(greenHair);
+                seekBarBlue.setProgress(blueHair);
             }
-
-
 
             invalidate();
         }
 
+    /**
+     * Connects the SeekBar-objects in the MainActivity-class
+     * so these objects can be called from the Face-class
+     *
+     * @param seekBarRed The SeekBar which controls how much red
+     *                   should be shown.
+     * @param seekBarGreen The SeekBar which controls how much Green
+     *      *              should be shown.
+     * @param seekBarBlue The SeekBar which controls how much Blue
+     *      *              should be shown
+     */
         public void setSeekBars(SeekBar seekBarRed,SeekBar seekBarGreen,SeekBar seekBarBlue){
             this.seekBarRed=seekBarRed;
             this.seekBarGreen = seekBarGreen;
             this.seekBarBlue = seekBarBlue;
         }
 
+    /**
+     * Connects the RadioGroup-object in the MainActivity-class
+     * so this object can be called from the Face-class.
+     *
+     * @param radioGroup The RadioGroup which controls what attribute
+     *                   of the face that should change color.
+     */
         public void setRadioGroup(RadioGroup radioGroup){
             this.radioGroup=radioGroup;
             skin = true;
         }
 
-public void updateSeekBars(){
-            seekBarRed.setProgress(redskin);
-            seekBarGreen.setProgress(greenskin);
-            seekBarBlue.setProgress(blueskin);
+    /**
+     * This method sets the seekBars values before any clicking
+     * on the radiobuttons has occured
+     */
+        public void updateSeekBars(){
+            seekBarRed.setProgress(redSkin);
+            seekBarGreen.setProgress(greenSkin);
+            seekBarBlue.setProgress(blueSkin);
 }
 
+    /**
+     * Listens continuously to see if a click-event happens of one
+     * of the radiobuttons. If that happens, the values of the seekbars
+     * are changed to match the values of the clicked attribute.
+     *
+     * @param radioGroup not used
+     * @param checkedId the int ID connected to the clicked button
+     */
     @Override
     public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
 
@@ -219,107 +252,140 @@ public void updateSeekBars(){
                 eyes=true;
                 skin=false;
                 hair=false;
-                seekBarRed.setProgress(redeyes);
-                seekBarGreen.setProgress(greeneyes);
-                seekBarBlue.setProgress(blueeyes);
+                seekBarRed.setProgress(redEyes);
+                seekBarGreen.setProgress(greenEyes);
+                seekBarBlue.setProgress(blueEyes);
                 //update seekbars with values of eyes
                 invalidate();
-
-
                 break;
             case R.id.radioButtonHair:
                 hair = true;
                 skin=false;
                 eyes=false;
-                seekBarRed.setProgress(redhair);
-                seekBarGreen.setProgress(greenhair);
-                seekBarBlue.setProgress(bluehair);
+                seekBarRed.setProgress(redHair);
+                seekBarGreen.setProgress(greenHair);
+                seekBarBlue.setProgress(blueHair);
                 invalidate();
-                //code for only changing haircolor
-
                 break;
             case R.id.radioButtonSkin:
                 skin =true;
                 hair = false;
                 eyes=false;
-                seekBarRed.setProgress(redskin);
-                seekBarGreen.setProgress(greenskin);
-                seekBarBlue.setProgress(blueskin);
+                seekBarRed.setProgress(redSkin);
+                seekBarGreen.setProgress(greenSkin);
+                seekBarBlue.setProgress(blueSkin);
                 invalidate();
                 break;
         }
-       // invalidate();
+
     }
 
+    /**
+     * Listens to any change in value on a seekbar.
+     * If so, sets that attribute to the value that
+     * the seekbar was changed to.
+     *
+     * @param seekBar The Seekbar that was changed.
+     * @param progress The value that the seekbar was set to.
+     * @param b not used parameter
+     */
     @Override
     public void onProgressChanged(SeekBar seekBar, int progress, boolean b) {
-
-
 
             switch(seekBar.getId()){
                 case R.id.seekBarRed:
                     if(skin){
-
-                    redskin = progress;}
+                    redSkin = progress;
+                    }
                     else if(eyes){
-
-                        redeyes=progress;}
+                        redEyes=progress;
+                    }
                     else if(hair){
-
-                        redhair=progress;}
-
+                        redHair=progress;
+                    }
                 break;
 
             case R.id.seekBarGreen:
                 if(skin){
-                    greenskin = progress;}
-                else if(eyes){greeneyes=progress;}
-                else if(hair){greenhair=progress;}
-
-
+                    greenSkin = progress;
+                }
+                else if(eyes){
+                    greenEyes=progress;
+                }
+                else if(hair){
+                    greenHair=progress;
+                }
                 break;
 
             case R.id.seekBarBlue:
                 if(skin){
-                    blueskin = progress;}
-                else if(eyes){blueeyes=progress;}
-                else if(hair){bluehair=progress;}
-
-
+                    blueSkin = progress;
+                }
+                else if(eyes){
+                    blueEyes=progress;
+                }
+                else if(hair){
+                    blueHair=progress;
+                }
                 break;
 
         }
         invalidate();
     }
 
+    /**
+     * unused method from interface SeekBar.OnSeekBarChangeListener.
+     * @param seekBar not used
+     */
     @Override
     public void onStartTrackingTouch(SeekBar seekBar) {
 
-
     }
 
+    /**
+     * unused method from interface SeekBar.OnSeekBarChangeListener.
+     * @param seekBar
+     */
     @Override
     public void onStopTrackingTouch(SeekBar seekBar) {
 
-
     }
 
 
-
+    /**
+     * Listens to find if any item on the spinner is selected.
+     * If so, the hairstyle is changed to the hairstyle selected on the spinner.
+     *
+     * @param parent The ArrayList with the options displayed on the spinner.
+     *
+     * @param view not used.
+     *
+     * @param position retrieves the value at the given position.
+     * @param id not used.
+     */
     @Override
     public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
         hairStyle = (int) parent.getItemAtPosition(position);
-
         invalidate();
         }
 
 
-
+    /**
+     * unused method from interface Spinner.OnItemSelectedListener.
+     *
+     * @param adapterView
+     */
     @Override
     public void onNothingSelected(AdapterView<?> adapterView) {
 
     }
 
+
+    /**
+     * Listens to find if any clickevent is recognized on the button
+     * If so, calls the randomize-method.
+     * @param view not used
+     */
     @Override
     public void onClick(View view) {
         randomize();
