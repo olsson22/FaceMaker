@@ -171,19 +171,19 @@ public class Face extends SurfaceView implements RadioGroup.OnCheckedChangeListe
         public void randomize(){
 
             Random rand = new Random();
-            redSkin = rand.nextInt(255)+1;
-            greenSkin = rand.nextInt(255)+1;
-            blueSkin = rand.nextInt(255)+1;
+            redSkin = rand.nextInt(255);
+            greenSkin = rand.nextInt(255);
+            blueSkin = rand.nextInt(255);
             skinColor = android.graphics.Color.rgb(redSkin,greenSkin,blueSkin);
 
-            redEyes = rand.nextInt(255)+1;
-            greenEyes = rand.nextInt(255)+1;
-            blueEyes = rand.nextInt(255)+1;
+            redEyes = rand.nextInt(255);
+            greenEyes = rand.nextInt(255);
+            blueEyes = rand.nextInt(255);
             eyeColor = android.graphics.Color.rgb(redEyes,greenEyes,blueEyes);
 
-            redHair = rand.nextInt(255)+1;
-            greenHair = rand.nextInt(255)+1;
-            blueHair = rand.nextInt(255)+1;
+            redHair = rand.nextInt(255);
+            greenHair = rand.nextInt(255);
+            blueHair = rand.nextInt(255);
             hairColor=android.graphics.Color.rgb(redHair,greenHair,blueHair);
 
 
@@ -406,7 +406,13 @@ public class Face extends SurfaceView implements RadioGroup.OnCheckedChangeListe
 
     }
 
-
+    /**
+     * Connects the Spinner in the MainActivity to this Class
+     * @param spinner the spinner that should be connected
+     */
+    public void setSpinner(Spinner spinner){
+        this.spinner = spinner;
+    }
     /**
      * Listens to find if any clickevent is recognized on the button
      * If so, calls the randomize-method.
@@ -415,7 +421,7 @@ public class Face extends SurfaceView implements RadioGroup.OnCheckedChangeListe
     @Override
     public void onClick(View view) {
         randomize();
-
+        spinner.setSelection(hairStyle-1);
         invalidate();
     }
 }
