@@ -42,6 +42,7 @@ public class MainActivity extends AppCompatActivity {
         seekBarBlue.setOnSeekBarChangeListener(faceobj);
 
 
+
         //Creates the Radiogroup object
         RadioGroup radiogroup = findViewById(R.id.radiogroup);
 

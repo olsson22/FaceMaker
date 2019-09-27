@@ -258,6 +258,17 @@ public class Face extends SurfaceView implements RadioGroup.OnCheckedChangeListe
      */
     @Override
     public void onCheckedChanged(RadioGroup radioGroup, int checkedId) {
+        /**
+         External Citation
+
+         Date: 23 September 2019
+
+         Problem: did not know what interface to use for the radiogroup
+
+         Resource: https://developer.android.com/reference/android/widget/RadioGroup
+
+         Solution: I found the interface from this page
+         * */
 
         switch(checkedId){
             case R.id.radioButtonEyes:
