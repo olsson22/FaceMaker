@@ -11,6 +11,10 @@ import android.widget.RadioGroup;
 import android.widget.SeekBar;
 import android.widget.Spinner;
 
+/**
+ * @author Fredrik Olsson
+ */
+
 public class MainActivity extends AppCompatActivity {
 
 
