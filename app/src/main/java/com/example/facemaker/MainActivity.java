@@ -85,7 +85,7 @@ public class MainActivity extends AppCompatActivity {
         Spinner spinner = findViewById(R.id.spinner2);
 
         //Creates an arraylist where the different haircuts will be added in the Face Class
-        ArrayAdapter<Integer> dataAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, faceobj.hairCuts);
+        ArrayAdapter<Integer> dataAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, faceobj.getHairStyle());
 
         //Specifies the layout to use when the different options appear
         dataAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);

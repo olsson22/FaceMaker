@@ -36,21 +36,21 @@ public class Face extends SurfaceView implements RadioGroup.OnCheckedChangeListe
 
 
 
-        public int redHair;
-        public int greenHair;
-        public int blueHair;
+        private int redHair;
+        private int greenHair;
+        private int blueHair;
 
-        public int redEyes;
-        public int greenEyes;
-        public int blueEyes;
+        private int redEyes;
+        private int greenEyes;
+        private int blueEyes;
 
-        public int redSkin;
-        public int greenSkin;
+        private int redSkin;
+        private int greenSkin;
         public int blueSkin;
 
-        public boolean skin;
-        public boolean hair;
-        public boolean eyes;
+        private boolean skin;
+        private boolean hair;
+        private boolean eyes;
         //public boolean first;
 
         private SeekBar seekBarRed;
@@ -58,20 +58,21 @@ public class Face extends SurfaceView implements RadioGroup.OnCheckedChangeListe
         private SeekBar seekBarBlue;
 
         private RadioGroup radioGroup;
-        Spinner spinner;
+        private Spinner spinner;
 
 
-        Paint paintFace = new Paint();
-        Paint paintHair = new Paint();
-        Paint paintEyes = new Paint();
-        Paint paintNose = new Paint();
-        Paint paintMouth = new Paint();
+        private Paint paintFace = new Paint();
+        private Paint paintHair = new Paint();
+        private Paint paintEyes = new Paint();
+        private Paint paintNose = new Paint();
+        private Paint paintMouth = new Paint();
 
-        int skinColor;
-        int eyeColor;
-        int hairColor;
-        int hairStyle;
-    List <Integer> hairCuts = new ArrayList<>();
+        private int skinColor;
+        private int eyeColor;
+        private int hairColor;
+        private int hairStyle;
+
+        private List <Integer> hairCuts = new ArrayList<>();
 
     /**
      * When a user creates a Face the user must specify what Context and
@@ -161,6 +162,10 @@ public class Face extends SurfaceView implements RadioGroup.OnCheckedChangeListe
 
             }
 
+    }
+
+    public List<Integer> getHairStyle(){
+            return hairCuts;
     }
 
     /**
