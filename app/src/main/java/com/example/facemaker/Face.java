@@ -164,6 +164,10 @@ public class Face extends SurfaceView implements RadioGroup.OnCheckedChangeListe
 
     }
 
+    /**
+     * returns the list of the hairstyles connected to the spinner
+     * @return
+     */
     public List<Integer> getHairStyle(){
             return hairCuts;
     }

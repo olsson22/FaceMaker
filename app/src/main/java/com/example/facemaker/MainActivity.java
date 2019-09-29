@@ -84,6 +84,7 @@ public class MainActivity extends AppCompatActivity {
         //Creates the spinner object
         Spinner spinner = findViewById(R.id.spinner2);
 
+
         //Creates an arraylist where the different haircuts will be added in the Face Class
         ArrayAdapter<Integer> dataAdapter = new ArrayAdapter<>(this, android.R.layout.simple_spinner_item, faceobj.getHairStyle());
 
